@@ -7,11 +7,10 @@ namespace Infrastructure;
 public class AppDbContext:DbContext
 {
     
-    public AppDbContext(DbContextOptions<AppDbContext> options/*, IHttpContextAccessor contextAccessor*/) :
+    public AppDbContext(DbContextOptions<AppDbContext> options) :
         base(options)
     {
-       // HttpContext = contextAccessor.HttpContext;
+     
     }
-   // public HttpContext? HttpContext { get; set; }
-    public DbSet<Test> Tests { get; set; }
+
 }
