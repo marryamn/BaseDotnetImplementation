@@ -20,8 +20,14 @@ public class ProductController:Controller
        )
     {
        var dd= await _mediator.Send(new GetAllProductsQuery());
- 
-        return Ok(dd);
+       if (dd != null)
+       {
+           return Ok(dd);
+       }
+       else
+       {
+           return NotFound("");
+       }
     }
 
 }
