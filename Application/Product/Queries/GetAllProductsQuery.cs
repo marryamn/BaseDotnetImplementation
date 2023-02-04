@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Application.Product.Queries;
 
-public class GetAllProductsQuery:IRequest<ResponseModel>
+public class GetAllProductsQuery:IRequest<StdResponse<List<GetAllProductsDto>>>
 {
-    public  string Name { get; set; }
+   
 }
