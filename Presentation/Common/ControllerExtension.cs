@@ -12,7 +12,7 @@ namespace Presentation.Common;
 [Route("api/v1")]
 public class ControllerExtension:Controller
 {
-    private  IMediator _mediator;
+    private IMediator _mediator;
 
     protected IMediator Mediator => _mediator ??= HttpContext.RequestServices.GetService<IMediator>();
     

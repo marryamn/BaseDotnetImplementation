@@ -11,7 +11,8 @@ namespace Presentation.Controllers;
 public class ProductController:ControllerExtension
 {
     [HttpGet]
-    public async Task<ActionResult<StdResponse<List<GetAllProductsDto>>>> AddCustomerOrder(
+    public async Task<ActionResult<StdResponse<PaginationModel<GetAllProductsDto>>>> AddCustomerOrder(
+        [FromQuery] int page=1,[FromQuery]int pageSize=10
        )
     {
        return Base(await Mediator.Send(new GetAllProductsQuery()));

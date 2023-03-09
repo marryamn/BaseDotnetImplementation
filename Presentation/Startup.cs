@@ -27,7 +27,7 @@ namespace Presentation
 
            services.AddEndpointsApiExplorer();
            services.AddSwaggerGen();
-           
+           services.AddHttpContextAccessor();
 
             services.AddCors(options =>
             {

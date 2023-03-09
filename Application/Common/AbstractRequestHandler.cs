@@ -1,17 +1,20 @@
 using Application.Common.Response;
 using Infrastructure;
 using MediatR;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace Application.Common;
 
 public abstract class AbstractRequestHandler<TRequest, TResponse>: IRequestHandler<TRequest, TResponse> where TRequest:IRequest<TResponse>
 {
-    public AbstractRequestHandler(AppDbContext dbcontext)
+    public AbstractRequestHandler(AppDbContext dbcontext,IHttpContextAccessor httpContextAccessor)
     {
         DbContext = dbcontext;
+        HttpContext = httpContextAccessor.HttpContext;
     }
-    
+   
+    protected HttpContext HttpContext { get; }
     public abstract Task<TResponse> Handle(TRequest request, CancellationToken cancellationToken);
     protected AppDbContext DbContext { get; }
     
