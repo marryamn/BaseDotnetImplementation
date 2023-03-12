@@ -1,10 +1,11 @@
 using Domain.Models;
+using Infrastructure.Common;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 
 namespace Infrastructure;
 
-public class AppDbContext:DbContext
+public class AppDbContext:DbContextExtension
 {
     
     public AppDbContext(DbContextOptions<AppDbContext> options) :
