@@ -35,9 +35,71 @@ public class DataBaseSeeder
        DbContext.SaveChanges();
 
     }
-   
+    [Seeder(2,typeof(Role))]
+    public void SeedRoles()
+    {
+        DbContext.AddRange(new List<Role>()
+        {
+            new Role()
+            {
+                Name = "Admin",
+ 
+            },new()
+            {
+                Name = "Head Admin",
+            }
+        });
+        DbContext.SaveChanges();
+
+    }
+    [Seeder(3,typeof(Permission))]
+    public void SeedPermission()
+    {
+        DbContext.AddRange(new List<Permission>()
+        {
+            new Permission()
+            {
+                Name = "مشاهده محصولات",
+                Code = "list-product"
+ 
+            },new()
+            {
+                Name = "حذف محصولات",
+                Code = "delete-product"
+            },new ()
+            {
+                Name = "مدیریت ادمین ها",
+                Code = "manage-admin"
+            }
+        });
+        DbContext.SaveChanges();
+
+    }
     
-    [Seeder(2,typeof(User))]
+    [Seeder(4,typeof(RolePermission))]
+    public void SeedRolePermissions()
+    {
+        var roles = DbContext.Roles.ToList();
+        var permissions = DbContext.Permissions.ToList();
+
+        roles.ForEach(x =>
+        {
+            permissions.ForEach(y =>
+            {
+                DbContext.Add(new RolePermission()
+                {
+                    RoleId = x.Id,
+                    PermissionId = y.Id
+
+                });
+            });
+        });
+
+            DbContext.SaveChanges();
+
+    }
+    
+    [Seeder(5,typeof(User))]
     public void SeedUsers()
     {
         DbContext.AddRange(new List<User>()
@@ -62,9 +124,10 @@ public class DataBaseSeeder
 
     }
     
-    [Seeder(3,typeof(Admin))]
+    [Seeder(6,typeof(Admin))]
     public void SeedAdmins()
     {
+        var roles = DbContext.Roles.ToList();
         DbContext.AddRange(new List<Admin>()
         {
             new Admin()
@@ -73,6 +136,7 @@ public class DataBaseSeeder
                 Email = "test@gmail.com",
                 Phone = "09142564968",
                 Password = BCrypt.Net.BCrypt.HashPassword("12345678"),
+                RoleId = roles.First().Id,
                 
             },new()
             {
@@ -80,6 +144,7 @@ public class DataBaseSeeder
                 Email = "test2@gmail.com",
                 Phone = "09142564967",
                 Password = BCrypt.Net.BCrypt.HashPassword("12345678"),
+                RoleId = roles.Last().Id,
                
             }
         });
