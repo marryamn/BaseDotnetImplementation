@@ -1,4 +1,5 @@
 using Application.Common;
+using Application.Common.Response;
 using Application.Common.Validations;
 using Infrastructure;
 using Microsoft.AspNetCore.Http;
@@ -13,9 +14,9 @@ public class GetAllProductsQueryHandler : AbstractRequestHandler<GetAllProductsQ
     }
 
     public override async Task<StdResponse<PaginationModel<GetAllProductsDto>>> Handle(GetAllProductsQuery request,
-        CancellationToken cancellationToken)
+        CancellationToken _)
     {
-        var validationResult = await new GetAllProductValidator().ValidateAsync(request, cancellationToken);
+        var validationResult = await new GetAllProductValidator( DbContext).ValidateAsync(request, _);
         if (validationResult.Failed())
         {
             return BadRequest<PaginationModel<GetAllProductsDto>>(validationResult.Messages());
@@ -25,8 +26,8 @@ public class GetAllProductsQueryHandler : AbstractRequestHandler<GetAllProductsQ
         {
             Name = x.Name
         }).GetPaged(HttpContext.Request);
-        
 
+        var dd=HttpContext;
         return Ok(product);
     }
 }

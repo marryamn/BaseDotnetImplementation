@@ -1,17 +1,21 @@
-using System.Net;
 using Application.Common;
+using Application.Common.Response;
 using Application.Product.Commands;
 using Application.Product.Queries;
-using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Presentation.Common;
+using Presentation.Filter;
 
-namespace Presentation.Controllers;
-[Route("api/")]
-[ApiController]
+namespace Presentation.Controllers.Admin;
+
+[ApiExplorerSettings(GroupName = "V1 AdminSwagger")]
+
 public class ProductController:ControllerExtension
 {
-    [HttpGet("/products")]
+    [Authorize(Policy = "Admin")]
+    [AdminPermission("list-product")]
+    [HttpGet("admin/products")]
     public async Task<ActionResult<StdResponse<PaginationModel<GetAllProductsDto>>>> GetProducts(
         [FromQuery] int page=1,[FromQuery]int pageSize=10
        )

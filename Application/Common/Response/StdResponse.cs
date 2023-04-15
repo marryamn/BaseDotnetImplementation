@@ -1,6 +1,6 @@
 using System.Net;
 
-namespace Application.Common;
+namespace Application.Common.Response;
 
 public class StdResponse<TValue>
 {
