@@ -35,4 +35,55 @@ public class DataBaseSeeder
        DbContext.SaveChanges();
 
     }
+   
+    
+    [Seeder(2,typeof(User))]
+    public void SeedUsers()
+    {
+        DbContext.AddRange(new List<User>()
+        {
+            new User()
+            {
+                Name = "User 1",
+                Email = "test@gmail.com",
+                Phone = "09142564968",
+                Password = BCrypt.Net.BCrypt.HashPassword("12345678")
+                
+            },new()
+            {
+                Name = "User 2",
+                Email = "test2@gmail.com",
+                Phone = "09142564967",
+                Password = BCrypt.Net.BCrypt.HashPassword("12345678")
+               
+            }
+        });
+        DbContext.SaveChanges();
+
+    }
+    
+    [Seeder(3,typeof(Admin))]
+    public void SeedAdmins()
+    {
+        DbContext.AddRange(new List<Admin>()
+        {
+            new Admin()
+            {
+                Name = "User 1",
+                Email = "test@gmail.com",
+                Phone = "09142564968",
+                Password = BCrypt.Net.BCrypt.HashPassword("12345678"),
+                
+            },new()
+            {
+                Name = "User 2",
+                Email = "test2@gmail.com",
+                Phone = "09142564967",
+                Password = BCrypt.Net.BCrypt.HashPassword("12345678"),
+               
+            }
+        });
+        DbContext.SaveChanges();
+
+    }
 }
