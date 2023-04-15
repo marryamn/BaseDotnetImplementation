@@ -1,0 +1,12 @@
+using Application.Common.Validations;
+using Infrastructure;
+
+namespace Application.[queryNamespace].[queryName]
+{
+    public class [queryName]QueryValidator : Validator<[queryName]Query, AppDbContext>
+    {
+        public [queryName]QueryValidator(AppDbContext context = null) : base(context)
+        {
+        }
+    }
+}

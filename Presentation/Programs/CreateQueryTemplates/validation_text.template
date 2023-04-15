@@ -1,0 +1,7 @@
+var validationResult = await new [queryName]QueryValidator(DbContext).ValidateAsync(request, _);
+            if (validationResult.Failed()) {
+                return BadRequest<[paginationStart][queryDtoName][paginationEnd]>(validationResult.Messages());
+            }
+            
+            
+        
